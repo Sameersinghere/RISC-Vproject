@@ -3,17 +3,22 @@ module immediate_generation (
     output [31:0] imm_out  // immediate value output
 );
 
-// Extracting instruction segments
-wire [31:20] i_type = instr[31:20];
-wire [31:25] s_type_msb = instr[31:25];
-wire [11:7] s_type_lsb = instr[11:7];
-wire [31:12] u_type = instr[31:12];
-wire [19:15] csr_type = instr[19:15];
+wire [2:0] imm_type;
 
-// Concatenation logic
-assign imm_out = (i_type == 32'b1) ? {i_type, instr[31]} :
-                 (s_type_msb == 7'b1) ? {s_type_msb, s_type_lsb, instr[31]} :
-                 (u_type == 20'b1) ? {u_type, instr[31]} :
-                 (csr_type == 5'b1) ? {csr_type, instr[31]} : 32'b0;
+// Decode the common RV32I immediate format from the opcode.
+assign imm_type =
+    (instr[6:0] == 7'b0100011) ? 3'b001 : // S-type
+    (instr[6:0] == 7'b1100011) ? 3'b010 : // B-type
+    (instr[6:0] == 7'b0110111 ||
+     instr[6:0] == 7'b0010111) ? 3'b011 : // U-type
+    (instr[6:0] == 7'b1101111) ? 3'b100 : // J-type
+    (instr[6:0] == 7'b1110011) ? 3'b101 : // CSR immediate
+                                  3'b000;  // I-type/default
+
+imm_gen u_imm_gen (
+    .instr_in(instr[31:7]),
+    .imm_type_in(imm_type),
+    .imm_out(imm_out)
+);
 
 endmodule

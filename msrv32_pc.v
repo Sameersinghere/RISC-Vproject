@@ -10,8 +10,8 @@ module msrv32_pc (
     
     output [31:0] iaddr_out,
     output [31:0] pc_plus_4_out,
-    output [31:0] misaligned_instr_out,
-    output [31:0] pc_mux_out
+    output misaligned_instr_out,
+    output reg [31:0] pc_mux_out
 );
 
     parameter BOOT_ADDRESS = 32'h00000000;  // Define this with your actual boot address
@@ -36,7 +36,7 @@ module msrv32_pc (
     assign misaligned_instr_out = branch_taken_in && pc_in[0];
 
     // PC MUX logic
-    always @(pc_src_in) begin
+    always @(*) begin
         case(pc_src_in)
             2'b00: pc_mux_out = mux_select[0];
             2'b01: pc_mux_out = mux_select[1];
@@ -50,4 +50,3 @@ module msrv32_pc (
     assign pc_plus_4_out = pc_plus_4;
 
 endmodule
-

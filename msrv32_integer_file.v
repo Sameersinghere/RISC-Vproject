@@ -26,12 +26,12 @@ module msrv32_integer_file (
 
     always @(*) begin
         // Directly forward data if there's a data hazard
-        if (wr_en_in && rs1_addr_in == rd_addr_in) 
+        if (wr_en_in && rd_addr_in != 5'b00000 && rs1_addr_in == rd_addr_in) 
             rs1_out = rd_in;
         else
             rs1_out = register_file[rs1_addr_in];
 
-        if (wr_en_in && rs2_addr_in == rd_addr_in) 
+        if (wr_en_in && rd_addr_in != 5'b00000 && rs2_addr_in == rd_addr_in) 
             rs2_out = rd_in;
         else
             rs2_out = register_file[rs2_addr_in];

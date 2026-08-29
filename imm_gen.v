@@ -1,16 +1,18 @@
 module imm_gen (
     input [31:7] instr_in,         // Instruction bits input
     input [2:0] imm_type_in,       // Immediate type input
-    output [31:0] imm_out          // Immediate value output
+    output reg [31:0] imm_out      // Immediate value output
 );
 
-    // Immediate values for different instruction types
-    wire [31:0] i_type = {instr_in[11:0], instr_in[11:0]};
-    wire [31:0] s_type = {instr_in[11], instr_in[7:0], instr_in[31:25], instr_in[11]};
-    wire [31:0] b_type = {instr_in[12], instr_in[10:5], instr_in[4:1], instr_in[11], instr_in[12]};
-    wire [31:0] u_type = {instr_in[31:12], 12'b0};
-    wire [31:0] j_type = {instr_in[20], instr_in[19:12], instr_in[11], instr_in[10:1], instr_in[20]};
-    wire [31:0] csr_type = {instr_in[19:15], 27'b0}; // Assuming csr type has 5-bit immediate
+    // RISC-V immediate encodings. instr_in maps to instruction bits [31:7].
+    wire [31:0] i_type   = {{20{instr_in[31]}}, instr_in[31:20]};
+    wire [31:0] s_type   = {{20{instr_in[31]}}, instr_in[31:25], instr_in[11:7]};
+    wire [31:0] b_type   = {{19{instr_in[31]}}, instr_in[31], instr_in[7],
+                            instr_in[30:25], instr_in[11:8], 1'b0};
+    wire [31:0] u_type   = {instr_in[31:12], 12'b0};
+    wire [31:0] j_type   = {{11{instr_in[31]}}, instr_in[31], instr_in[19:12],
+                            instr_in[20], instr_in[30:21], 1'b0};
+    wire [31:0] csr_type = {27'b0, instr_in[19:15]};
 
     // Multiplexer to select the correct immediate type
     always @(*) begin
