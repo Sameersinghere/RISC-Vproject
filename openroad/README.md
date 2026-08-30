@@ -50,7 +50,7 @@ The design was run through OpenROAD-flow-scripts on Sky130HD through detailed ro
 | Estimated total power | 1.30 mW |
 | Worst VDD IR drop | 0.102 mV |
 
-Generated OpenROAD artifacts included final ODB, DEF, SPEF, SDC, and gate-level Verilog. GDS merge/DRC/LVS require a working command-line KLayout installation.
+Generated artifacts included final ODB, DEF, SPEF, SDC, gate-level Verilog, and merged GDS. GDS merge was verified with KLayout 0.30.12 with matching LEF/GDS cells and no orphan cells.
 
 ## Run With Docker
 
