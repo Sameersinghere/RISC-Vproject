@@ -15,5 +15,3 @@ export CORE_UTILIZATION = 35
 export CORE_ASPECT_RATIO = 1
 export CORE_MARGIN = 2
 export PLACE_DENSITY = 0.55
-
-export SYNTH_HDL_FRONTEND = yosys
