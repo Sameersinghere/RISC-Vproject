@@ -34,6 +34,8 @@ The design uses:
 
 The design was run through OpenROAD-flow-scripts on Sky130HD through detailed routing and final OpenROAD reporting.
 
+The committed result summary, report snapshots, and final GDS screenshot are under `openroad/results/`.
+
 | Metric | Result |
 | --- | ---: |
 | Synthesized area | 6090 um^2 |
