@@ -65,6 +65,8 @@ OpenROAD is used for ASIC-style synthesis, placement, routing, timing, area, and
 
 An OpenROAD-flow-scripts configuration is provided under `openroad/`. See `openroad/README.md` for the Sky130 command line.
 
+Final report: [`docs/rtl_to_gds_final_report.pdf`](docs/rtl_to_gds_final_report.pdf)
+
 Final Sky130HD GDS layout screenshot:
 
 ![RISC-V FIR accelerator GDS layout](openroad/results/riscv_fir_accelerator_top_gds.png)
