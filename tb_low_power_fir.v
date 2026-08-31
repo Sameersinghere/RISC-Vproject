@@ -22,6 +22,11 @@ module tb_low_power_fir;
     initial clk = 1'b0;
     always #5 clk = ~clk;
 
+    initial begin
+        $dumpfile("build/tb_low_power_fir.vcd");
+        $dumpvars(0, tb_low_power_fir);
+    end
+
     task push_sample;
         input signed [15:0] value;
         input signed [33:0] expected;

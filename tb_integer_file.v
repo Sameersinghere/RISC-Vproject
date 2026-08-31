@@ -25,6 +25,11 @@ module tb_integer_file;
     always #5 clk = ~clk;
 
     initial begin
+        $dumpfile("build/tb_integer_file.vcd");
+        $dumpvars(0, tb_integer_file);
+    end
+
+    initial begin
         rst = 1'b1;
         wr_en = 1'b0;
         rs1 = 5'd0;

@@ -5,12 +5,18 @@ VERILOG_SOURCES = imm_gen.v immediate_generation.v msrv32_instruction_mux.v \
 	msrv32_integer_file.v msrv32_wr_en_generator.v low_power_fir.v \
 	riscv_fir_accelerator_top.v msrv32_pc.v
 
-.PHONY: test clean
+.PHONY: test waveforms clean
 
 test: build/tb_imm_gen.vvp build/tb_low_power_fir.vvp build/tb_integer_file.vvp
 	$(VVP) build/tb_imm_gen.vvp
 	$(VVP) build/tb_low_power_fir.vvp
 	$(VVP) build/tb_integer_file.vvp
+
+waveforms: test
+	@echo "Waveforms:"
+	@echo "  build/tb_imm_gen.vcd"
+	@echo "  build/tb_low_power_fir.vcd"
+	@echo "  build/tb_integer_file.vcd"
 
 build:
 	mkdir -p build

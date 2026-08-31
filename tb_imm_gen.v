@@ -8,6 +8,11 @@ module tb_imm_gen;
     );
 
     initial begin
+        $dumpfile("build/tb_imm_gen.vcd");
+        $dumpvars(0, tb_imm_gen);
+    end
+
+    initial begin
         instr = 32'hfff10093; #1; // addi x1, x2, -1
         if (imm !== 32'hffff_ffff) $fatal(1, "I-type immediate failed: %h", imm);
 

@@ -42,6 +42,13 @@ tb_low_power_fir passed
 tb_integer_file passed
 ```
 
+The testbenches also generate GTKWave-compatible waveform files:
+
+```sh
+make waveforms
+gtkwave build/tb_low_power_fir.vcd
+```
+
 ## FPGA Integration Notes
 
 The FIR block uses an explicit `sample_valid_in` enable so synthesis tools can infer low-activity register updates. For ASIC-style clock gating, replace this enable with a technology-specific integrated clock-gating cell during synthesis.
@@ -53,3 +60,7 @@ The current top-level wrapper is intentionally small and testable. A full FPGA s
 OpenROAD is used for ASIC-style synthesis, placement, routing, timing, area, and power reports. It is not a replacement for RTL functional simulation.
 
 An OpenROAD-flow-scripts configuration is provided under `openroad/`. See `openroad/README.md` for the Sky130 command line.
+
+Final Sky130HD GDS layout screenshot:
+
+![RISC-V FIR accelerator GDS layout](openroad/results/riscv_fir_accelerator_top_gds.png)
