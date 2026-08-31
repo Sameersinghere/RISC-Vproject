@@ -49,6 +49,10 @@ make waveforms
 gtkwave build/tb_low_power_fir.vcd
 ```
 
+Example FIR waveform:
+
+![Low-power FIR waveform](openroad/results/tb_low_power_fir_waveform.png)
+
 ## FPGA Integration Notes
 
 The FIR block uses an explicit `sample_valid_in` enable so synthesis tools can infer low-activity register updates. For ASIC-style clock gating, replace this enable with a technology-specific integrated clock-gating cell during synthesis.

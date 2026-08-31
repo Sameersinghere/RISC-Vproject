@@ -23,6 +23,7 @@ Design: `riscv_fir_accelerator_top`
 
 | File | Purpose |
 | --- | --- |
+| `tb_low_power_fir_waveform.png` | Simulation waveform showing valid/sample/result FIR behavior. |
 | `riscv_fir_accelerator_top_gds.png` | Rendered screenshot of the final GDS layout. |
 | `reports/synth_stat.txt` | Yosys synthesis area/cell summary. |
 | `reports/synth_check.txt` | Yosys structural check output. |
